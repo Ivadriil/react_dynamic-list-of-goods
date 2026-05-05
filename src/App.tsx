@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import { GoodsList } from './GoodsList';
 import { Good } from './types/Good';
@@ -9,17 +8,44 @@ import { getAll, get5First, getRedGoods } from './api/goods';
 
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
+  const [all, setAll] = useState<boolean>(false);
+  const [fiveFirst, setFiveFirst] = useState<boolean>(false);
+  const [redAll, setRedAll] = useState<boolean>(false);
 
   const loadAllGoods = () => {
-    getAll().then(setGoods);
+    if (!all) {
+      setAll(true);
+      setFiveFirst(false);
+      setRedAll(false);
+
+      return getAll().then(setGoods);
+    }
+
+    return;
   };
 
   const load5First = () => {
-    get5First().then(setGoods);
+    if (!fiveFirst) {
+      setAll(false);
+      setFiveFirst(true);
+      setRedAll(false);
+
+      return get5First().then(setGoods);
+    }
+
+    return;
   };
 
   const loadRedGoods = () => {
-    getRedGoods().then(setGoods);
+    if (!redAll) {
+      setAll(false);
+      setFiveFirst(false);
+      setRedAll(true);
+
+      return getRedGoods().then(setGoods);
+    }
+
+    return;
   };
 
   return (
