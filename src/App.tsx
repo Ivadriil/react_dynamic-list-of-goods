@@ -18,7 +18,9 @@ export const App: React.FC = () => {
       setFiveFirst(false);
       setRedAll(false);
 
-      return getAll().then(setGoods);
+      return getAll()
+        .then(setGoods)
+        .catch(error => error);
     }
 
     return;
@@ -30,7 +32,9 @@ export const App: React.FC = () => {
       setFiveFirst(true);
       setRedAll(false);
 
-      return get5First().then(setGoods);
+      return get5First()
+        .then(setGoods)
+        .catch(error => error);
     }
 
     return;
@@ -42,7 +46,9 @@ export const App: React.FC = () => {
       setFiveFirst(false);
       setRedAll(true);
 
-      return getRedGoods().then(setGoods);
+      return getRedGoods()
+        .then(setGoods)
+        .catch(error => error);
     }
 
     return;
